@@ -1,3 +1,4 @@
+<!--This is used for the search results front end page-->
 <?php 
   include 'backendSearch.php';
 ?>
@@ -15,6 +16,7 @@
 </head>
 <body>
 
+<!--Start of Nav bar-->
 <nav class="teal darken-1" role="navigation">
   <a id="logo-container" href="index.html" class="brand-logo" style = "position:absolute; left:80px">
     <i class="material-icons">contacts</i>
@@ -32,7 +34,9 @@
   </div>
 
 </nav>
+<!-- End of Nav bar-->
 
+<!-- Start of header information (what page your on, what you searched)-->
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
     <br><br>
@@ -44,13 +48,19 @@
 
   </div>
 </div>
+<!--End of header information-->
 
+<!--Start of search results table-->
 <div class = "container">
-  <table cellspacing='0' style = "margin-bottom: 3cm" class = "centered"> <!-- cellspacing='0' is important, must stay -->
+  <table cellspacing='0' style = "margin-bottom: 3cm" class = "centered">
+<!--This is what is called to print the table. The table function is in backendSearch.php-->
         <?php printSearchResults(); ?>
   </table>
 </div>
+<!--End of search results table-->
 
+
+<!--Start of footer-->
   <footer class="page-footer purple lighten-1">
     <div class="container">
       <div class="row">
@@ -76,9 +86,10 @@
       </div>
     </div>
   </footer>
+<!--End of Footer-->
 
 
-  <!--  Scripts-->
+  <!-- Scripts (Add at the end of file for increased performance)-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>

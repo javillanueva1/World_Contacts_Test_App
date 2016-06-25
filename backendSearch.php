@@ -12,13 +12,10 @@ if($method == 'POST')
             if((!empty($_POST["searchTerm"])))
             {
                 if(preg_match($namePattern, $_POST["searchTerm"]))
-                    $name = "%" . $_POST["searchTerm"] . "%"; //search in firstname, lastname and email
+                    $name = "%" . $_POST["searchTerm"] . "%"; //search in firstname, lastname and email, for security purposes need to do it this way
                 $email = "%" . $_POST["searchTerm"] . "%"; //search only in email (this is only used if @ is in the searchTerm)
             }
-            else
-            {
-                //header("Location: addData.php?error=1");
-            }
+            //There is no need for else, there should always be a searchTerm if this is called
         }
     }
 
@@ -26,8 +23,7 @@ try
 {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //select from all locations because no email format given for 
-    //SELECT * FROM `alldata` WHERE `FirstName` LIKE 'steven'
+    //select from all locations because no email format given for searchTerm
     if(!empty($name))
     {
         //Search using FirstName category
@@ -54,6 +50,7 @@ try
         $searchResults = array_map("unserialize", array_unique(array_map("serialize", $searchResults)));
 
     }  
+    //Email format given for searchTerm, use 
     else if(!empty($email))
     {
         //Search using Email Category only
@@ -62,7 +59,6 @@ try
         $stmt->execute();
         $searchResults = $stmt->fetchAll();
     }
-    //header("Location:searchResults.php");
 }
 catch(PDOException $e)
 {
@@ -72,14 +68,11 @@ catch(PDOException $e)
 $dbh = NULL;
 
 
-/*
-    <td class = "col s4">Something</td>
-    <td class = "col s4">TheSoandSo</td>
-    <td class = "col s4">somethingthe@soandso.com</td>
-*/
+//Print search results
 function printSearchResults()
 {
     global $searchResults;
+    //Print table
     if(count($searchResults) != 0)
     {
         echo "<thead>";
@@ -103,6 +96,7 @@ function printSearchResults()
             }
         }
     }
+    //Print that there are no results
     else
     {
         echo "<p class = \"col s12\" style = \"text-align: center\">No Results</p>";

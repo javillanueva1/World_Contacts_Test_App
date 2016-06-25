@@ -1,18 +1,21 @@
 <?php
+
+/* File: backendAddData.php
+ * 
+ * Description: This is used as the backed for adding form data to the mySQL database.
+ * 				This form data comes from addData.php
+ */
+
 require "db_config.php";
 $method = $_SERVER["REQUEST_METHOD"];
 $namePattern = '/^[a-zA-Z]+$/';
+
 
 if($method == 'POST')
 	{
 		if(isset($_POST))
 		{
-			if(!empty($_POST["firstName"]))
-				echo "firstName is not empty\n";
-			if(!empty($_POST["lastName"]))
-				echo "lastName is not empty\n";
-			if(!empty($_POST["email"]))
-				echo "email is not empty\n";
+			//use regex for form validation for names. Email validation tested and works with Materialize
 			if((!empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["email"])))
 			{
 				if(preg_match($namePattern, $_POST["firstName"]))
@@ -23,6 +26,7 @@ if($method == 'POST')
 			}
 			else
 			{
+				//Head back to addData.php front end in error
 				header("Location: addData.php?error=1");
 			}
 		}
@@ -39,6 +43,7 @@ try
     $stmt->bindParam(':email', $email);
     $stmt->execute();
 
+    //Head back to addData.php without error
     header("Location: addData.php");	
 }
 catch(PDOException $e)
