@@ -1,3 +1,6 @@
+<!--This is the file which is used for the add data front end -->
+
+<!-- Check if what was entered was an error (missing info usually because the form is validated with JS -->
 <?php
   if (!empty($_GET["error"]))
     $error = $_GET["error"];
@@ -17,6 +20,8 @@
 </head>
 <body>
 
+
+<!-- Nav Bar Start -->
 <nav class="teal darken-1" role="navigation">
   <a id="logo-container" href="index.html" class="brand-logo" style = "position:absolute; left:80px">
     <i class="material-icons">contacts</i>
@@ -34,12 +39,15 @@
   </div>
 
 </nav>
+<!-- Nav Bar End -->
 
+<!-- Information before form start -->
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
     <br><br>
     <h1 class="header center black-text">Add Data</h1>
     <div class="row center">
+      <!-- Here is where the check to see if you came here by error is made-->
       <?php
         global $error;
           if(!$error)
@@ -52,8 +60,9 @@
 
   </div>
 </div>
+<!-- Information before form end -->
 
-<!--input--> 
+<!--input form start--> 
 <div class="row container">
     <form class="col s12" action="backendAddData.php" method = "post">
       <div class="row">
@@ -81,7 +90,9 @@
 
     </form>
   </div>
-<!-- eoi -->
+<!-- input form end -->
+
+<!-- Start of Footer -->
   <footer class="page-footer purple lighten-1">
     <div class="container">
       <div class="row">
@@ -108,8 +119,10 @@
     </div>
   </footer>
 
+<!--End of Footer-->
 
-  <!--  Scripts-->
+
+  <!--  Scripts (Put at end to increase performance)-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
